@@ -4,7 +4,7 @@ import { Jumbotron } from "reactstrap";
 import GridCard from "../../Components/GridCard";
 import Heading from "../../Components/Heading";
 import ListCard from "../../Components/ListCard";
-import { GetProducts } from "../../Layouts/Main";
+import { GetProducts, ProductContext } from "../../Layouts/Main";
 import './index.css';
 
 function ShopGrid() {
@@ -91,7 +91,8 @@ function ShopGrid() {
 
 function ShopGridDefault(){
 
-  const products = useContext(GetProducts);
+  const { products, searchProducts } = useContext(ProductContext);
+  searchProducts("pant");
   return (
     <div className="row justify-content-center d-flex">
         <div className="row container d-flex justify-content-center my-5">
@@ -99,7 +100,7 @@ function ShopGridDefault(){
             products.shopGrid
               .slice(0, 12)
               .map((product) => (
-                <GridCard product={product} key={product.id} />
+                <GridCard product={product} key={product.name} />
               ))}
         </div>
       </div>
@@ -107,7 +108,8 @@ function ShopGridDefault(){
 }
 
 function ShopList(){
-  const products = useContext(GetProducts);
+  const { products, searchProducts } = useContext(ProductContext);
+  searchProducts("iphone");
   return (
     <div className="row justify-content-center d-flex">
         <div className="row container d-flex justify-content-center my-5">
@@ -115,7 +117,7 @@ function ShopList(){
             products.listView
               .slice(0, 7)
               .map((product) => (
-                <ListCard product={product} key={product.id} />
+                <ListCard product={product} key={product.name} />
               ))}
         </div>
       </div>

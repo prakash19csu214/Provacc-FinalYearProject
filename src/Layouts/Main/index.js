@@ -6,32 +6,22 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import {NewArrivals, BestSeller, SpecialOffer, Featured} from '../../Components/HomeNested'
 import ShopGrid from "../../Pages/ShopGrid";
 
-const GetProducts = createContext();
+export const ProductContext = createContext();
 
 function Main() {
 
-  const [products, setProducts] = useState([]);
-
-  const fetchData = () => {
-
-    const url = "https://my-json-server.typicode.com/pkboss6591/fake-server/products" //modified from local host
-
-
-    return fetch(url)
-          .then((response) => response.json())
-          .then((data) => setProducts(data));
-  }
-
-  useEffect(() => {
-    fetchData();
-  },[]);
-
-  if (!products) return null;
+    const [products, setProducts] = useState([]);
+  
+    const searchProducts = async (query) => {
+      const response = await fetch(`http://localhost:5000/search?query=${query}`);
+      const data = await response.json();
+      setProducts(data);
+    }
 
   return (
     <>
       <Header />
-      <GetProducts.Provider value={products}>
+      <ProductContext.Provider value={{ products, searchProducts }}>
         <Switch>
           <Route path="/home" component={Home}>
             <Route path="arrivals" element={<NewArrivals />} />
@@ -42,11 +32,10 @@ function Main() {
           <Route path="/shopGrid" component={ShopGrid} />
           <Redirect to="/home" />
         </Switch>
-        </GetProducts.Provider>
+        </ProductContext.Provider>
         <Footer />
     </>
   )
 }
 
 export default Main
-export {GetProducts}
