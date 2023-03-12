@@ -1,48 +1,50 @@
-import React from "react";
+import React, { useState } from 'react';
+import axios from 'axios';
+import './index.css'
 
-class App extends React.Component {
-  state = {
-    searchInput: "",
-    products: [],
+const MasterSearch = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [products, setProducts] = useState([]);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
-  handleSearchInputChange = (event) => {
-    this.setState({ searchInput: event.target.value });
+  const handleSearchClick = () => {
+    axios.get(`http://localhost:5000/search?query=${searchTerm}`)
+      .then(response => {
+        setProducts(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   };
 
-  handleSearch = async () => {
-    const { searchInput } = this.state;
-    const response = await fetch(
-        `http://localhost:5000/search?query=${searchInput}`
-    );
-    const products = await response.json();
-    this.setState({ products });
-  };
-
-  render() {
-    const { products } = this.state;
-    return (
-      <div>
-        <div>
-          <input type="text" onChange={this.handleSearchInputChange} />
-          <button onClick={this.handleSearch}>Search</button>
-        </div>
-        <div>
-          {products.map((product) => (
-            <div
-              key={product.id}
-              style={{ border: "1px solid black", margin: "10px", padding: "10px", display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}
-              onClick={() => { window.location.href = product.image; }}
-            >
-              <img src={product.image} alt={product.name} style={{ width: "100px", height: "100px" }} />
-              <h3>{product.name}</h3>
-              <p>Price: ${product.price}</p>
-            </div>
-          ))}
-        </div>
+  return (
+    <div>
+      <h1>Product Search</h1>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        <button onClick={handleSearchClick}>Search</button>
       </div>
-    );
-  }
-}
+      <div className="product-container">
+        {products.map(product => (
+          <div key={product.id} className="product-card">
+            <a href={product.image} target="_blank" rel="noopener noreferrer">
+              <img src={product.image} alt={product.name} />
+            </a>
+            <h2>{product.name}</h2>
+            <p>${product.price}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-export default App;
+export default MasterSearch;
