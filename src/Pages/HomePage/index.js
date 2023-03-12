@@ -18,7 +18,7 @@ import { ProductContext } from "../../Layouts/Main";
 export default function Home() {
 
   const { products, searchProducts } = useContext(ProductContext);
-  searchProducts("shirt");
+  searchProducts("tshirt");
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();

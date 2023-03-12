@@ -1,22 +1,32 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import Home from "../../Pages/HomePage";
 import Header from "../Header";
 import Footer from "../Footer";
 import { Switch, Route, Redirect } from "react-router-dom";
-import {NewArrivals, BestSeller, SpecialOffer, Featured} from '../../Components/HomeNested'
+import {
+  NewArrivals,
+  BestSeller,
+  SpecialOffer,
+  Featured,
+} from "../../Components/HomeNested";
 import ShopGrid from "../../Pages/ShopGrid";
+import axios from "axios";
 
 export const ProductContext = createContext();
 
 function Main() {
+  const [products, setProducts] = useState([]);
 
-    const [products, setProducts] = useState([]);
-  
-    const searchProducts = async (query) => {
-      const response = await fetch(`http://localhost:5000/search?query=${query}`);
-      const data = await response.json();
-      setProducts(data);
+  const searchProducts = async (query) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/search?query=${query}`
+      );
+      setProducts(response.data);
+    } catch (error) {
+      console.error(error);
     }
+  };
 
   return (
     <>
@@ -32,10 +42,10 @@ function Main() {
           <Route path="/shopGrid" component={ShopGrid} />
           <Redirect to="/home" />
         </Switch>
-        </ProductContext.Provider>
-        <Footer />
+      </ProductContext.Provider>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default Main
+export default Main;
