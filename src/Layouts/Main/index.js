@@ -10,28 +10,30 @@ import {
   Featured,
 } from "../../Components/HomeNested";
 import ShopGrid from "../../Pages/ShopGrid";
+import MasterSearch from "../../Components/MasterSearch"
 import axios from "axios";
 
 export const ProductContext = createContext();
 
 function Main() {
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
 
-  const searchProducts = async (query) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/search?query=${query}`
-      );
-      setProducts(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const searchProducts = async (query) => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:5000/search?query=${query}`
+  //     );
+  //     setProducts(response.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // console.log(products);
 
   return (
     <>
       <Header />
-      <ProductContext.Provider value={{ products, searchProducts }}>
+      {/* <ProductContext.Provider value={{ products, searchProducts }}> */}
         <Switch>
           <Route path="/home" component={Home}>
             <Route path="arrivals" element={<NewArrivals />} />
@@ -40,9 +42,10 @@ function Main() {
             <Route path="specialOffer" element={<SpecialOffer />} />
           </Route>
           <Route path="/shopGrid" component={ShopGrid} />
+          <Route path="/masterSearch" component={MasterSearch} />
           <Redirect to="/home" />
         </Switch>
-      </ProductContext.Provider>
+      {/* </ProductContext.Provider> */}
       <Footer />
     </>
   );

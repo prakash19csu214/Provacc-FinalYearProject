@@ -2,15 +2,40 @@ import React, { Component } from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./index.css";
 import { Navbar, NavbarBrand, Nav, Collapse, NavItem } from "reactstrap";
-import NavLink from "react-router-dom/NavLink";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isNavOpen: false,
+      products: [],
+      query: "",
     };
     this.toggleNav = this.toggleNav.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  async searchProducts() {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/search?query=${this.state.query}`
+      );
+      this.setState({ products: response.data });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.searchProducts();
+  }
+
+  handleInputChange(event) {
+    this.setState({ query: event.target.value });
   }
 
   toggleNav() {
@@ -18,8 +43,13 @@ class Header extends Component {
       isNavOpen: !this.state.isNavOpen,
     });
   }
+  
 
   render() {
+    const { query } = this.state;
+    console.log(this.state.products);
+
+
     return (
       <>
         <div className="header-top text-white">
@@ -80,25 +110,25 @@ class Header extends Component {
                       title="&#xf129; Pages" //font awesome code inside title
                     >
                       <NavLink className="nav-link sub-nav" to="/shopGrid">
-                      <NavDropdown.Item className="faas" href="/shopGrid">
-                      Ecommerce Accesories & Fashion item
-                      </NavDropdown.Item>
+                        <NavDropdown.Item className="faas" href="/shopGrid">
+                          Ecommerce Accesories & Fashion item
+                        </NavDropdown.Item>
                       </NavLink>
                       <NavLink className="nav-link sub-nav" to="/shopGrid">
-                      <NavDropdown.Item className="faas" href="/shopGrid">
-                        Electronics Items
-                      </NavDropdown.Item>
+                        <NavDropdown.Item className="faas" href="/shopGrid">
+                          Electronics Items
+                        </NavDropdown.Item>
                       </NavLink>
                       <NavLink className="nav-link sub-nav" to="/shopGrid">
-                      <NavDropdown.Item className="faas" href="/shopGrid">
-                      Fashion items
-                      </NavDropdown.Item>
+                        <NavDropdown.Item className="faas" href="/shopGrid">
+                          Fashion items
+                        </NavDropdown.Item>
                       </NavLink>
                       <NavDropdown.Divider />
-                      <NavLink className="nav-link sub-nav" to="/shopGrid">
-                      <NavDropdown.Item className="faas" href="/shopGrid">
-                       Trending Products
-                      </NavDropdown.Item>
+                      <NavLink className="nav-link sub-nav" to="/masterSearch">
+                        <NavDropdown.Item className="faas" href="/masterSearch">
+                          Master Search
+                        </NavDropdown.Item>
                       </NavLink>
                     </NavDropdown>
                   </NavLink>
@@ -115,18 +145,23 @@ class Header extends Component {
                 </NavItem>
               </Nav>
               <Nav className="ml-auto" navbar>
-                <form class="form-inline my-2 my-lg-0">
+                <form
+                  class="form-inline my-2 my-lg-0"
+                  onSubmit={this.handleSubmit}
+                >
                   <input
                     class="form-control mr-sm-2"
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
+                    value={query}
+                    onChange={this.handleInputChange}
                   />
                   <button
                     class="btn btn-outline-success my-2 my-sm-0"
                     type="submit"
                   >
-                    <span className="fa fa-lg fa-search"></span>
+                    Search
                   </button>
                 </form>
               </Nav>
