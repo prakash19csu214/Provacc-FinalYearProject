@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1rem;
   }
   
   input[type="text"] {
@@ -14,15 +13,6 @@
     max-width: 400px;
   }
   
-  button {
-    padding: 0.5rem;
-    background-color: #0077cc;
-    color: #fff;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-  }
   
   button:hover {
     background-color: #005fa3;
@@ -104,4 +94,5 @@
       justify-content: space-between;
     }
   }
+  
   
