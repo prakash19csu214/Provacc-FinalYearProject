@@ -59,7 +59,7 @@ class Header extends Component {
                 <div className="row">
                   <div className="col-6">
                     <span className="fa fa-light fa-envelope fa-sm"></span>{" "}
-                    Company Address type here
+                    NCU, Gurgaon, HR 122001
                   </div>
                   <div className="col-6">
                     <span className="fa fa-phone fa-sm"></span> +94 000 00000
@@ -94,7 +94,7 @@ class Header extends Component {
               <span className="fa fa-solid fa-bars"></span>
             </button>
             <NavbarBrand className="mr-auto navbar-logo" href="/home">
-              <b>Hekto</b>
+              <b>Provacc</b>
             </NavbarBrand>
             <Collapse isOpen={this.state.isNavOpen} navbar>
               <Nav navbar className="offset-2">

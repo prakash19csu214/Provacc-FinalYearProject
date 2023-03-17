@@ -11,7 +11,7 @@ function Footer() {
         <div className="row justify-content-center">
           <div className="">
             <NavbarBrand className="mr-auto navbar-logo" href="/home">
-              <b>Hekto</b>
+              <b>Provacc</b>
             </NavbarBrand>
             <Nav className="ml-auto" navbar>
               <form class="form-inline my-2 my-lg-0">
@@ -32,9 +32,9 @@ function Footer() {
             <div className="mt-4 contact">
             <h5>Contact Info-:</h5>
             <address>
-            17 Princess Road, London, 
+            The NorthCap University
             <br />
-             Greater London NW1 8JR, UK
+             Gurgaon, Haryana
             </address>
             </div>
           </div>
@@ -105,7 +105,7 @@ function Footer() {
     <div className="footer-btm">
     <div className="row align-items-bottom p5">
           <div className="offset-2 col-12 col-sm-4">
-            <p>©Webecy - All Rights Reserved</p>
+            <p>©Provacc - All Rights Reserved</p>
           </div>
           <div className="col-12 col-sm-6">
             <div className="text-center">
