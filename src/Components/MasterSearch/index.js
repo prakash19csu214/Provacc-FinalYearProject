@@ -7,23 +7,34 @@ const MasterSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false); // add loading state
+  const [sortOrder, setSortOrder] = useState("asc"); // initial sorting order is ascending
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   const handleSearchClick = () => {
-    setLoading(true); // set loading state to true before making the API call
+    setLoading(true);
     axios
       .get(`http://localhost:5000/search?query=${searchTerm}`)
       .then((response) => {
-        setProducts(response.data);
-        setLoading(false); // set loading state to false after the API call is finished
+        let sortedProducts = response.data;
+        if (sortOrder === "asc") {
+          sortedProducts.sort((a, b) => a.price - b.price);
+        } else if (sortOrder === "desc") {
+          sortedProducts.sort((a, b) => b.price - a.price);
+        }
+        setProducts(sortedProducts);
+        setLoading(false);
       })
       .catch((error) => {
         console.error(error);
-        setLoading(false); // set loading state to false on error as well
+        setLoading(false);
       });
+  };
+
+  const handleSortOrderChange = (event) => {
+    setSortOrder(event.target.value);
   };
 
   return (
@@ -32,14 +43,21 @@ const MasterSearch = () => {
         <h1 className="text-center my-5">Product Search</h1>
       </div>
       <div className="d-flex justify-content-center mb-5">
-        <div className="search-container my-3">
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
+        <div className="d-flex justify-content-center mb-5">
+          <div className="search-container my-3">
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </div>
+          <select value={sortOrder} onChange={handleSortOrderChange}>
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+          </select>
         </div>
+
         <button
           className="btn btn-outline-success my-3 "
           style={{ height: "45px" }}
@@ -54,12 +72,12 @@ const MasterSearch = () => {
           <Spinner /> // show a spinner if loading is true
         ) : (
           products.map((product) => (
-              <div key={product.id} className="product-card mb-5">
-                <a href={product.link} target="_blank" rel="noopener noreferrer">
+            <div key={product.id} className="product-card mb-5">
+              <a href={product.link} target="_blank" rel="noopener noreferrer">
                 <img src={product.image} alt={product.name} />
-              <h2 className="my-5 mx-2">{product.name}</h2>
-              <p className="my-5 mx-2">Rs.{product.price}</p>
-              <p className="my-5 mx-2">{product.source}</p>
+                <h2 className="my-5 mx-2">{product.name}</h2>
+                <p className="my-5 mx-2">Rs.{product.price}</p>
+                <p className="my-5 mx-2">{product.source}</p>
               </a>
             </div>
           ))
