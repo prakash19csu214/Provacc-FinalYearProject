@@ -79,6 +79,54 @@
   .product-card:hover p {
     transform: scale(1.1);
   }
+
+  /* CSS for select dropdown */
+.select-dropdown {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+
+.select-dropdown select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.select-dropdown select::-ms-expand {
+  display: none;
+}
+
+.select-dropdown::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 6px 0 6px;
+  border-color: #999 transparent transparent transparent;
+  pointer-events: none;
+}
+
+.select-dropdown select:focus {
+  border-color: #000;
+}
+
+.select-dropdown option {
+  font-size: 16px;
+}
+
   
   @media (min-width: 576px) {
     .search-container {

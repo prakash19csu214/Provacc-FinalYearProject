@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./index.css";
-import {images} from "../../Assets/Images";
+import { images } from "../../Assets/Images";
 import Spinner from "../Spinner"; // import a loading spinner component
 
 const MasterSearch = () => {
@@ -43,7 +43,6 @@ const MasterSearch = () => {
       return images.paytmmall;
     }
   };
-  
 
   const handleSortOrderChange = (event) => {
     setSortOrder(event.target.value);
@@ -54,8 +53,20 @@ const MasterSearch = () => {
       <div className="d-flex justify-content-center">
         <h1 className="text-center my-5">Product Search</h1>
       </div>
+      <div className="container">
+  <div className="row justify-content-center">
+    <div className="select-dropdown my-2">
+      <select value={sortOrder} onChange={handleSortOrderChange}>
+        <option value="asc">Price: Low to High</option>
+        <option value="desc">Price: High to Low</option>
+      </select>
+    </div>
+  </div>
+</div>
+
       <div className="d-flex justify-content-center mb-5">
         <div className="d-flex justify-content-center mb-5">
+          
           <div className="search-container my-3">
             <input
               type="text"
@@ -64,10 +75,6 @@ const MasterSearch = () => {
               onChange={handleSearchChange}
             />
           </div>
-          <select value={sortOrder} onChange={handleSortOrderChange}>
-            <option value="asc">Price: Low to High</option>
-            <option value="desc">Price: High to Low</option>
-          </select>
         </div>
 
         <button
@@ -89,9 +96,12 @@ const MasterSearch = () => {
                 <img src={product.image} alt={product.name} />
                 <h2 className="my-5 mx-2">{product.name}</h2>
                 <p className="my-5 mx-2">Rs.{product.price}</p>
-                <img src={getSourceImage(product.source)} alt={product.source} />
+                <img
+                  src={getSourceImage(product.source)}
+                  alt={product.source}
+                />
               </a>
-            </div>          
+            </div>
           ))
         )}
       </div>
