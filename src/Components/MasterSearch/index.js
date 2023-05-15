@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./index.css";
+import {images} from "../../Assets/Images";
 import Spinner from "../Spinner"; // import a loading spinner component
 
 const MasterSearch = () => {
@@ -32,6 +33,17 @@ const MasterSearch = () => {
         setLoading(false);
       });
   };
+
+  const getSourceImage = (source) => {
+    if (source === "Flipkart") {
+      return images.flipkart;
+    } else if (source === "Amazon") {
+      return images.amazon;
+    } else if (source === "Paytm Mall") {
+      return images.paytmmall;
+    }
+  };
+  
 
   const handleSortOrderChange = (event) => {
     setSortOrder(event.target.value);
@@ -77,9 +89,9 @@ const MasterSearch = () => {
                 <img src={product.image} alt={product.name} />
                 <h2 className="my-5 mx-2">{product.name}</h2>
                 <p className="my-5 mx-2">Rs.{product.price}</p>
-                <p className="my-5 mx-2">{product.source}</p>
+                <img src={getSourceImage(product.source)} alt={product.source} />
               </a>
-            </div>
+            </div>          
           ))
         )}
       </div>

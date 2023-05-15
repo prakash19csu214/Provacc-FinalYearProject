@@ -23,7 +23,9 @@ import mini3 from "./mini3.png";
 import mini4 from "./mini4.png";
 import sofa from "./sofa-blue.png";
 import logos from "./logos.png";
-
+import paytmmall from "./paytmmall.png";
+import flipkart from "./flipkart.jpg";
+import amazon from "./amazon.jpg"
 const images = {
   JumboPic1,
   JumboPic2,
@@ -50,6 +52,9 @@ const images = {
   home2,
   home3,
   logos,
+  paytmmall,
+  flipkart,
+  amazon
 };
 
 export {images};
