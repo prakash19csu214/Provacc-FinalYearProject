@@ -8,7 +8,7 @@ import Spinner from "../../Components/Spinner";
 import axios from "axios";
 import "./index.css";
 
-function ShopGrid() {
+function HouseholdPage() {
   const [view, setView] = useState("grid");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +20,7 @@ function ShopGrid() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/search?query=mobiles electronics devices");
+      const response = await axios.get("http://localhost:5000/search?query=household kitchen");
       let sortedProducts = response.data;
 
       if (sortOrder === "asc") {
@@ -53,7 +53,7 @@ function ShopGrid() {
         <Container>
           <Row>
             <Col>
-              <Heading props="Exclusive Electronics Items" />
+              <Heading props="Save Big on Household & Kitchen items !!" />
             </Col>
           </Row>
         </Container>
@@ -62,7 +62,7 @@ function ShopGrid() {
       <Container>
         <Row>
           <Col className="col-12 col-md-6 col-xl-6">
-            <h3 className="grid-head">Electronics & Accessories</h3>
+            <h3 className="grid-head">Household & Kitchen Items</h3>
           </Col>
 
           <Col className="col-12 col-md-6 col-xl-6">
@@ -140,4 +140,4 @@ function ShopList({ products, loading }) {
   );
 }
 
-export default ShopGrid;
+export default HouseholdPage;

@@ -11,6 +11,8 @@ import {
 } from "../../Components/HomeNested";
 import ShopGrid from "../../Pages/ShopGrid";
 import MasterSearch from "../../Components/MasterSearch"
+import FashionPage from "../../Pages/FashionPage";
+import HouseholdPage from "../../Pages/HouseholdPage";
 import axios from "axios";
 
 export const ProductContext = createContext();
@@ -42,7 +44,10 @@ function Main() {
             <Route path="specialOffer" element={<SpecialOffer />} />
           </Route>
           <Route path="/shopGrid" component={ShopGrid} />
+          <Route path="/fashionItems" component={FashionPage} />
+          <Route path="/shopGrid" component={ShopGrid} />
           <Route path="/masterSearch" component={MasterSearch} />
+          <Route path="/household" component={HouseholdPage} />
           <Redirect to="/home" />
         </Switch>
       {/* </ProductContext.Provider> */}

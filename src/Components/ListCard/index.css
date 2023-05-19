@@ -3,8 +3,10 @@
 }
 
 .list-img{
-    height: 178px;
-    width: 100%;
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    object-position: center;
 }
 
 .featured-head{

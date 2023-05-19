@@ -30,6 +30,10 @@ export default function Home() {
       });
   }, []);
 
+  const handleClick = () => {
+    window.open('/masterSearch'); // Open product link in a new tab
+  };
+
     return (
       <>
         <Jumbotron>
@@ -48,7 +52,7 @@ export default function Home() {
                   <p>
                     Upgrade your living space with our stunning selection of furniture that combines style, comfort, and durability.
                   </p>
-                  <button className="btnn">
+                  <button className="btnn" onClick={handleClick}>
                     <div className="align-item-center btnn-text">Shop Now</div>
                   </button>
                 </div>
@@ -136,7 +140,11 @@ export default function Home() {
 Our Newslater" />
 </div>
             <div className="row container d-flex justify-content-center my-4">
-            <div className=""><Button props="Shop Now" /></div>
+            <div className="row d-flex justify-content-center my-3">
+        <button className="btn btn-outline-success my-2 my-sm-0" type="button" onClick={handleClick}>
+          <span className="btnn2-text">Shop Now</span>
+        </button>
+      </div>
 
             </div>
             

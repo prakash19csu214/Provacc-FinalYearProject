@@ -2,19 +2,31 @@ import React from "react";
 import './index.css'
 
 const GridCard = ({product}) => {
-  var image = require('../../Assets/Images/'+product.img)
+  // var image = require('../../Assets/Images/'+product.img)
+
+  const handleClick = () => {
+    window.open(product.link, "_blank"); // Open product link in a new tab
+  };
+
+
   return (
     <div className='col-4 col-sm-3 mx-3 my-2'>
       <div className="row d-flex justify-content-center featured">
-        <img src={image} alt={product.name} className="img-fluid featured-img" />
+        <img src={product.image} alt={product.name} className="img-fluid featured-img" />
       </div>
       <br />
       <div className="text-center featured-head">
-      {product.name}
+      <b>{product.name}</b>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <br/>
+        <br/>
+          <b>Rs. {product.price} &nbsp;&nbsp;</b>
+        <span className="latest-mini"> {product.price - 0.25 *product.price}</span>
       </div>
-      <div className="text-center featured-para">
-      {product.nprice} &nbsp;
-      <span className="latest-mini">{product.oprice}</span>
+      <div className="row d-flex justify-content-center my-3">
+        <button className="btn btn-outline-success my-2 my-sm-0" type="button" onClick={handleClick}>
+          <span className="btnn2-text">Shop Now</span>
+        </button>
       </div>
     </div>
   );

@@ -104,67 +104,27 @@ class Header extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/aboutus">
-                    <NavDropdown
-                      className="fa fa-lg"
-                      title="&#xf129; Pages" //font awesome code inside title
-                    >
-                      <NavLink className="nav-link sub-nav" to="/shopGrid">
-                        <NavDropdown.Item className="faas" href="/shopGrid">
-                          Ecommerce Accesories & Fashion item
-                        </NavDropdown.Item>
-                      </NavLink>
-                      <NavLink className="nav-link sub-nav" to="/shopGrid">
-                        <NavDropdown.Item className="faas" href="/shopGrid">
-                          Electronics Items
-                        </NavDropdown.Item>
-                      </NavLink>
-                      <NavLink className="nav-link sub-nav" to="/shopGrid">
-                        <NavDropdown.Item className="faas" href="/shopGrid">
-                          Fashion items
-                        </NavDropdown.Item>
-                      </NavLink>
-                      <NavDropdown.Divider />
-                      <NavLink className="nav-link sub-nav" to="/masterSearch">
-                        <NavDropdown.Item className="faas" href="/masterSearch">
-                          Master Search
-                        </NavDropdown.Item>
-                      </NavLink>
-                    </NavDropdown>
+                  <NavLink className="nav-link" to="/shopGrid">
+                    <span className="fa fa-camera fa-lg mt-2"> Electronics</span>
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/shopGrid">
-                    <span className="fa fa-list fa-lg mt-2"> Products</span>
+                  <NavLink className="nav-link" to="/fashionItems">
+                    <span className="fa fa-diamond fa-lg mt-2"> Fashion</span>
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/shopGrid">
-                    <span className="fa fa-address-card fa-lg mt-2"> Blog</span>
+                  <NavLink className="nav-link" to="/household">
+                    <span className="fa fa-spoon fa-lg mt-2"> Household & Kitchen</span>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" to="/masterSearch">
+                    <span className="fa fa-search fa-lg mt-2"> Master Search</span>
                   </NavLink>
                 </NavItem>
               </Nav>
-              <Nav className="ml-auto" navbar>
-                <form
-                  class="form-inline my-2 my-lg-0"
-                  onSubmit={this.handleSubmit}
-                >
-                  <input
-                    class="form-control mr-sm-2"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                    value={query}
-                    onChange={this.handleInputChange}
-                  />
-                  <button
-                    class="btn btn-outline-success my-2 my-sm-0"
-                    type="submit"
-                  >
-                    Search
-                  </button>
-                </form>
-              </Nav>
+             
             </Collapse>
           </div>
         </Navbar>
