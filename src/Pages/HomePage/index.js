@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import { Jumbotron } from "reactstrap";
-// import Link  from 'react-router-dom/Link';
-import {images} from "../../Assets/Images";
+import { images } from "../../Assets/Images";
 import Heading from "../../Components/Heading";
 import { ShopexCard } from "../../Components/ShopexCard";
 import FeaturedProducts from "../../Components/FeaturedProductsCard";
@@ -11,22 +10,25 @@ import TrendingProducts from "../../Components/TrendingProductsCard";
 import TopCategory from "../../Components/TopCategoryCard";
 import { Button } from "../../Components/Button";
 import BlogsCard from "../../Components/BlogsCard";
-import { useContext } from "react";
-import { ProductContext } from "../../Layouts/Main";
-
+import axios from "axios";
+import Spinner from "../../Components/Spinner"; // Import the Spinner component
 
 export default function Home() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
 
-  // const { products, searchProducts } = useContext(ProductContext);
-  // searchProducts("tshirt");
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const query = event.target.elements.query.value;
-  //   searchProducts(query);
-
-  // }
-  const products = []
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/search?query=latest")
+      .then((response) => {
+        setProducts(response.data);
+        setLoading(false); // Set loading to false when the products are fetched
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false); // Set loading to false on error as well
+      });
+  }, []);
 
     return (
       <>
@@ -64,19 +66,26 @@ export default function Home() {
         </Jumbotron>
 
         <div className="sec-3 my-4 container">
-          <div className="row justify-content-center d-flex">
-            <Heading props="Featured Products" />
-            <div className="row container d-flex justify-content-center my-5">
-            {products.featuredProducts && products.featuredProducts.slice(0,4).map(product => <FeaturedProducts product={product} key={product.name} />)}
-
-            </div>
+        <div className="row justify-content-center d-flex">
+          <Heading props="Featured Products" />
+          <div className="row container d-flex justify-content-center my-5">
+            {loading ? (
+              <Spinner /> // Show the loading spinner if the products are still loading
+            ) : (
+              // Render the FeaturedProducts component with the fetched products
+              products &&
+              products.slice(0, 4).map((product) => (
+                <FeaturedProducts product={product} key={product.id} />
+              ))
+            )}
           </div>
         </div>
+      </div>
         <div className="sec-3 my-4 container">
           <div className="row justify-content-center d-flex">
             <Heading props="Latest Products" />
             <div className="row container d-flex justify-content-center my-5">
-            {products.latestProducts && products.latestProducts.slice(0,6).map(product => <LatestProducts product={product} key={product.name} />)}
+            {products && products.slice(0,6).map(product => <LatestProducts product={product} key={product.name} />)}
             </div>
           </div>
         </div>
@@ -104,7 +113,7 @@ export default function Home() {
             <div className="col-12 justify-content-center d-flex">
               <Heading props="Discount Item" />
             </div>
-            <div className="col-6 col-sm-8 my-5">
+            <div className="col-6 col-sm-6 my-5">
               <Heading props="20% Discount Of All Products" />
               <br />
               <span className="chair-para">Eams Sofa Compact</span>
