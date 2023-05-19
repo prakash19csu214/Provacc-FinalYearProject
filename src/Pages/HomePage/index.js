@@ -19,7 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/search?query=latest")
+      .get("http://localhost:5000/search?query=products")
       .then((response) => {
         setProducts(response.data);
         setLoading(false); // Set loading to false when the products are fetched
@@ -44,10 +44,9 @@ export default function Home() {
                   <p style={{ color: "var(--primary-color)" }}>
                     Best Furniture For Your Castle....
                   </p>
-                  <b>New Furniture Collection Trends in 2020</b>
+                  <b>New Furniture Collection Trends in 2023</b>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Magna in est adipiscing in phasellus non in justo.
+                    Upgrade your living space with our stunning selection of furniture that combines style, comfort, and durability.
                   </p>
                   <button className="btnn">
                     <div className="align-item-center btnn-text">Shop Now</div>
@@ -74,7 +73,7 @@ export default function Home() {
             ) : (
               // Render the FeaturedProducts component with the fetched products
               products &&
-              products.slice(0, 4).map((product) => (
+              products.slice(2, 10).map((product) => (
                 <FeaturedProducts product={product} key={product.id} />
               ))
             )}
@@ -85,27 +84,15 @@ export default function Home() {
           <div className="row justify-content-center d-flex">
             <Heading props="Latest Products" />
             <div className="row container d-flex justify-content-center my-5">
-            {products && products.slice(0,6).map(product => <LatestProducts product={product} key={product.name} />)}
-            </div>
-          </div>
-        </div>
-        <div className="sec-3 my-4 container">
-          <div className="row justify-content-center d-flex">
-            <Heading props="What Shopex Offer!" />
-            <div className="row container d-flex justify-content-center my-5">
-              
-            {products.shopexCard && products.shopexCard.slice(0,4).map(product => <ShopexCard product={product} key={product.name} />)}
-
-            </div>
-          </div>
-        </div>
-        <div className="sec-3 my-4 container">
-          <div className="row justify-content-center d-flex">
-            <Heading props="Trending Products" />
-            <div className="row container d-flex justify-content-center my-5">
-            {products.trendingProducts && products.trendingProducts.slice(0,4).map(product => <TrendingProducts product={product} key={product.name} />)}
-
-            </div>
+            {loading ? (
+              <Spinner /> // Show the loading spinner if the products are still loading
+            ) : (
+              // Render the FeaturedProducts component with the fetched products
+              products &&
+              products.slice(10, 20).map((product) => (
+                <LatestProducts product={product} key={product.id} />
+              ))
+            )}            </div>
           </div>
         </div>
         <div className="sec-3 my-4 container">
@@ -113,31 +100,25 @@ export default function Home() {
             <div className="col-12 justify-content-center d-flex">
               <Heading props="Discount Item" />
             </div>
-            <div className="col-6 col-sm-6 my-5">
+            <div className="col-7 col-sm-7 my-5">
               <Heading props="20% Discount Of All Products" />
               <br />
-              <span className="chair-para">Eams Sofa Compact</span>
+              <span className="chair-para">James Sofa Compact</span>
               <br />
               <br />
               <span className="chair-para2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu eget
-                feugiat habitasse nec, bibendum condimentum.
+              Sofas feature cushions or seat pads for seating comfort. These cushions can be removable or fixed, and they may be filled with foam, feathers, or a combination of materials
               </span>
               <br />
               <br />
               <span className="chair-para2">
-                <span className="fa fa-check"></span> Material expose like
-                metals &nbsp;&nbsp;
-                <span className="fa fa-check"></span> Material expose like
-                metals <br />
-                <span className="fa fa-check"></span> Material expose like
-                metals &nbsp;&nbsp;
-                <span className="fa fa-check"></span> Material expose like
-                metals
+                <span className="fa fa-check"></span> Good Style and Design &nbsp;&nbsp;
+                <span className="fa fa-check"></span> Best Quality <br />
+                <span className="fa fa-check"></span> Long Term Product &nbsp;&nbsp;
+                <span className="fa fa-check"></span> Value for Money
               </span>{" "}
               <br />
               <br />
-              <Button props="Shop Now" />
             </div>
             <div className="col-6 col-sm-4">
               <img
@@ -145,19 +126,6 @@ export default function Home() {
                 className="img-fluname"
                 style={{ height: "500px", weight: "515px" }}
               />
-            </div>
-          </div>
-        </div>
-        <div className="sec-3 my-4 container">
-          <div className="row justify-content-center d-flex">
-            <Heading props="Top Categories" />
-            <div className="row container d-flex justify-content-center my-5">
-            {products.topCategory && products.topCategory.slice(0,4).map(product => <TopCategory product={product} key={product.name} />)}
-
-              {/* <TopCategory image={images.c} />
-              <TopCategory image={images.d} />
-              <TopCategory image={images.e} />
-              <TopCategory image={images.f} /> */}
             </div>
           </div>
         </div>
@@ -174,21 +142,6 @@ Our Newslater" />
             
           </div>
         </div>
-        <div className="sec-3 my-4 container">
-          <div className="row justify-content-center d-flex">
-            <Heading props="Latest Blogs" />
-            <div className="row container d-flex justify-content-center my-5">
-            {products.blogsCard && products.blogsCard.slice(0,3).map(product => <BlogsCard product={product} key={product.name} />)}
-
-            </div>
-          </div>
-        </div>
-        {/* <nav>
-        <Link to="arrivals">NewArrivals</Link>
-        <Link to="bestSeller">BestSeller</Link>
-        <Link to="featured">Featured</Link>
-        <Link to="specialOffer">SpecialOffer</Link>
-      </nav> */}
       </>
     );
 }

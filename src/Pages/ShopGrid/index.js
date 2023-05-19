@@ -29,7 +29,6 @@ function ShopGrid() {
       <Row>
         <Col className="col-12 col-md-5 col-xl-6">
           <h3 className="grid-head">Ecommerce Accesories & Fashion item</h3>
-          <h5 className="grid-head">About 9,620 results (0.62 seconds)</h5>
         </Col>
 
         <Col className="col-12 col-md-7 col-xl-6">
