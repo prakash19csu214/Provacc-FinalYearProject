@@ -29,7 +29,7 @@ function ListCard({ product }) {
         <br/>
         <br/>
           <b>Rs. {product.price} &nbsp;&nbsp;</b>
-        <span className="latest-mini"> {product.price - 0.25 *product.price}</span> &nbsp; &nbsp; 
+        <span className="latest-mini"> {product.price + 0.25 *product.price}</span> &nbsp; &nbsp; 
             <div className="text-center">
             <span className="fa fa-star checked"></span>
             <span className="fa fa-star checked"></span>

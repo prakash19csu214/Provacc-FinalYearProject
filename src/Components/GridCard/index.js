@@ -21,7 +21,7 @@ const GridCard = ({product}) => {
         <br/>
         <br/>
           <b>Rs. {product.price} &nbsp;&nbsp;</b>
-        <span className="latest-mini"> {product.price - 0.25 *product.price}</span>
+        <span className="latest-mini"> {product.price + 0.25 *product.price}</span>
       </div>
       <div className="row d-flex justify-content-center my-3">
         <button className="btn btn-outline-success my-2 my-sm-0" type="button" onClick={handleClick}>
